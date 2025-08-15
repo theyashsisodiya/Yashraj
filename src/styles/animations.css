@@ -1,0 +1,179 @@
+/* 3D Clay Animations */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateY(-10px) rotateX(5deg) rotateY(5deg); }
+  50% { transform: translateY(-20px) rotateX(10deg) rotateY(-5deg); }
+  75% { transform: translateY(-10px) rotateX(-5deg) rotateY(10deg); }
+}
+
+@keyframes float-fast {
+  0%, 100% { transform: translateY(0px) rotateZ(0deg); }
+  33% { transform: translateY(-15px) rotateZ(3deg); }
+  66% { transform: translateY(-30px) rotateZ(-3deg); }
+}
+
+@keyframes floating-element {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotateZ(0deg); }
+  25% { transform: translateY(-8px) translateX(4px) rotateZ(2deg); }
+  50% { transform: translateY(-16px) translateX(-4px) rotateZ(-2deg); }
+  75% { transform: translateY(-8px) translateX(8px) rotateZ(1deg); }
+}
+
+@keyframes clay-morph {
+  0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  25% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  75% { border-radius: 70% 30% 40% 60% / 30% 60% 60% 40%; }
+}
+
+@keyframes typing {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.3); }
+}
+
+@keyframes skill-bar-fill {
+  from { width: 0%; }
+  to { width: var(--target-width, 0%); }
+}
+
+/* Apply animations to elements */
+.floating-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.floating-fast {
+  animation: float-fast 4s ease-in-out infinite;
+}
+
+.floating-element {
+  animation: floating-element 5s ease-in-out infinite;
+}
+
+.clay-element-1 {
+  animation: float-slow 8s ease-in-out infinite, clay-morph 10s ease-in-out infinite;
+}
+
+.clay-element-2 {
+  animation: float-fast 6s ease-in-out infinite reverse, clay-morph 12s ease-in-out infinite reverse;
+}
+
+.clay-element-3 {
+  animation: floating-element 7s ease-in-out infinite, clay-morph 9s ease-in-out infinite;
+}
+
+.clay-element-4 {
+  animation: float-slow 5s ease-in-out infinite reverse;
+}
+
+.typing-text {
+  animation: typing 2s ease-in-out;
+}
+
+.computer-panel {
+  transform-style: preserve-3d;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.computer-panel:hover {
+  transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+}
+
+.clay-card {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 1rem;
+}
+
+.clay-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.skill-bar {
+  animation: skill-bar-fill 2s ease-out forwards;
+}
+
+/* 3D Cursor Effect */
+.cursor-3d {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #3B82F6, #F97316);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: all 0.1s ease-out;
+  box-shadow: 
+    0 0 10px rgba(59, 130, 246, 0.5),
+    0 0 20px rgba(249, 115, 22, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.cursor-3d::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Responsive animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Additional 3D effects */
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Glassmorphism effect */
+.glass-effect {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3B82F6, #F97316);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #2563EB, #EA580C);
+}
